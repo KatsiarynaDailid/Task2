@@ -8,10 +8,7 @@
   <ItemGroup>
     <Compile Include="TextChange.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="WorkWithFile.cs" />
-  </ItemGroup>
-
+  
   <Target
     Name="Build"
     Inputs="@(Compile)"

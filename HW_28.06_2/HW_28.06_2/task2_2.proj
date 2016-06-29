@@ -5,6 +5,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
+    <ItemGroup>
+    <Compile Include="PrintCollections.cs" />
+  </ItemGroup>
 
 
   <Target

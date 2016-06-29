@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Text.RegularExpressions;
 
 
@@ -7,7 +8,14 @@ namespace TextEdition
 {
     class TextChange
     {
-        public string[] SlitTheText(String text) {        
+
+        private string[] sentences;
+        private String text;
+
+        public TextChange(String text) { this.text = text; }
+        public TextChange(string[] sentences) { this.sentences = sentences; }
+
+        public string[] SlitTheText() {        
             
             string[] sentences = Regex.Split(text, @"(?<=[.!?])");
             int lineCounter = sentences.Length;
@@ -21,35 +29,49 @@ namespace TextEdition
         }
 
 
-        public string[] ChangeTheCase(string[] text) {
+        public string[] ChangeTheCase() {
             
-            int lineCounter = text.Length;
+            int lineCounter = sentences.Length;
             while (lineCounter != 0)
             {
-                int b = text.Length - lineCounter;
-                text[b] = text[b].ToLower();
+                int b = sentences.Length - lineCounter;
+                sentences[b] = sentences[b].ToLower();
                 lineCounter--;
             }
 
-            return text;
+            return sentences;
         }
 
 
-        public string[] AddTime(string[] text) {
+        public string[] AddTime() {
 
-            int lineCounter = text.Length;
+            int lineCounter = sentences.Length;
             while (lineCounter != 0)
             {
-                int b = text.Length - lineCounter;
+                int b = sentences.Length - lineCounter;
                 string timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff ", CultureInfo.InvariantCulture);
-                text[b] = text[b].Trim();
-                text[b] = timestamp + text[b];
-                text[b] = text[b] + "\n";
+                sentences[b] = sentences[b].Trim();
+                sentences[b] = timestamp + sentences[b];
+                sentences[b] = sentences[b] + "\n";
                 lineCounter--;
             }
 
-            return text;
+            return sentences;
         }
-    
+
+
+        public void WriteInFile(string path)
+        {
+            using (StreamWriter sr = new StreamWriter(path))
+            {
+                int i = -1;
+                while (++i < sentences.Length)
+                {
+                    sr.WriteLine(sentences[i]);
+                }
+            }
+        }
+
+
     }
 }
