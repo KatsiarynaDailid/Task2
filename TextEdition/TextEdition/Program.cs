@@ -11,7 +11,7 @@ namespace TextEdition
           
             Console.WriteLine("Write the path to the file with text you would like to edit: ");                    
             path = CheckThePath(path);          
-            text = File.ReadAllText(path); //считываем с файла
+            text = File.ReadAllText(path); 
               
             TextChange forSpliting = new TextChange(text); 
             string[] textSplit = forSpliting.SlitTheText(); 

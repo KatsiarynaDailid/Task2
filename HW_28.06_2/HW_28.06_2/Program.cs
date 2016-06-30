@@ -34,6 +34,7 @@ namespace HW_28._06_2
                 printObj.PrintStrings();
             }
 
+            Console.WriteLine("For exit type any key...");
             Console.ReadLine();
 
         }
